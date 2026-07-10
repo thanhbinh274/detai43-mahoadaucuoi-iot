@@ -1,0 +1,17 @@
+{
+  "_note": "File cau hinh mo ta thuat toan/tham so dung trong demo E2EE. KHONG chua secret/khoa that.",
+  "encryption": {
+    "algorithm": "AES-256-GCM",
+    "key_length_bits": 256,
+    "nonce_length_bytes": 12,
+    "key_scope": "chi Device va App giu khoa, Cloud khong duoc cap khoa nay"
+  },
+  "transport": {
+    "protocol_suggestion": "MQTT hoac HTTPS (TLS 1.2+) cho tang van chuyen",
+    "note": "TLS bao ve duong truyen; AES-256-GCM o tren la lop E2EE bo sung, doc lap voi TLS"
+  },
+  "topics_or_endpoints_example": {
+    "device_publish": "iot/health/ward302/telemetry",
+    "app_subscribe": "iot/health/ward302/telemetry"
+  }
+}

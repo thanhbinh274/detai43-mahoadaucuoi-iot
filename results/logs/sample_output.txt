@@ -1,0 +1,50 @@
+======================================================================
+KICH BAN A: Ma hoa duong truyen (TLS-only), KHONG phai E2EE
+======================================================================
+[Device] Gui du lieu qua ket noi TLS toi Cloud.
+[Device] Du lieu goc (plaintext): {"device_id": "device-ward302-01", "timestamp": "2026-07-10T10:40:21.795096+00:00", "heart_rate_bpm": 78, "room": "Phong 302", "patient_note": "Chi so on dinh"}
+
+[Cloud] TLS handshake thanh cong, cloud giai ma tang van chuyen.
+[Cloud] *** Cloud DOC DUOC toan bo noi dung ban ro sau day: ***
+[Cloud]   -> {"device_id": "device-ward302-01", "timestamp": "2026-07-10T10:40:21.795096+00:00", "heart_rate_bpm": 78, "room": "Phong 302", "patient_note": "Chi so on dinh"}
+[Cloud] => Neu cloud bi xam nhap / nhan vien noi bo lam sai quy
+           trinh, du lieu nhay cam (nhip tim, phong benh, ghi chu)
+           co the bi doc, sua hoac ro ri ngay tai lop trung gian.
+
+[Cloud] Chuyen tiep du lieu (co the o dang khac) toi App.
+[App]   Nhan va hien thi du lieu binh thuong.
+[App]   -> {"device_id": "device-ward302-01", "timestamp": "2026-07-10T10:40:21.795096+00:00", "heart_rate_bpm": 78, "room": "Phong 302", "patient_note": "Chi so on dinh"}
+
+======================================================================
+KICH BAN B: Ma hoa dau cuoi (End-to-End Encryption - E2EE)
+======================================================================
+[Device] Ma hoa payload bang khoa E2EE (chi Device + App co).
+[Device] Goi tin gui di (ciphertext, KHONG phai ban ro):
+[Device]   -> {"device_id": "device-ward302-01", "alg": "AES-256-GCM", "nonce_b64": "QV1jXA7U69kjB/wh", "ciphertext_b64": "y4JOAGdukXgEJ0MoC/7henX7JmBr77gS1Iyu/dVrWw+m+N5HFUts0SLhJ7Vh4MnLZe332+vip+IV339s8ZX7EJZPK0P/dTHYZ/eaqyQtRgOv/OPf2HSuv1Xd4/xj70ASxEYwoacqYkuJy/qztdf8SRTSTrvc5+yWePNapIsxKVcGdJ9STszY0X6asCOja9AbZiTEXLhaqPgyqn463fIgBrjk3eJ7/d1agoTH9w8glo0="}
+
+[Cloud] Nhan goi tin, LUU va CHUYEN TIEP nguyen trang.
+[Cloud] Cloud KHONG co khoa E2EE nen thu doc thu:
+[Cloud]   -> That bai khi giai ma: InvalidTag
+[Cloud]   => Cloud CHI THAY chuoi ciphertext vo nghia, khong
+              biet nhip tim, phong benh hay ghi chu benh nhan.
+
+[App]   Nhan ciphertext tu Cloud, dung khoa E2EE de giai ma.
+[App]   -> Giai ma thanh cong: {"device_id": "device-ward302-01", "timestamp": "2026-07-10T10:40:21.798391+00:00", "heart_rate_bpm": 78, "room": "Phong 302", "patient_note": "Chi so on dinh"}
+[App]   => Du lieu giai ma khop 100% voi du lieu goc tu Device.
+
+======================================================================
+KIEM TRA BO SUNG: AES-GCM phat hien du lieu bi sua doi (tampering)
+======================================================================
+[Attacker/Cloud] Thu sua 1 byte trong ciphertext truoc khi den App.
+[App] Tu choi du lieu: xac thuc GCM that bai (InvalidTag)
+[App] => AES-GCM cung cap ca bi mat (confidentiality) lan toan
+         ven/xac thuc (integrity/authenticity) chi trong 1 buoc.
+
+======================================================================
+KET LUAN NHANH
+======================================================================
+- TLS-only: bao ve du lieu TREN DUONG TRUYEN, nhung cloud/trung
+  gian van doc duoc ban ro sau khi giai ma tang van chuyen.
+- E2EE: chi Device va App (2 dau cuoi) giu khoa; Cloud chi thay
+  ciphertext, phu hop du lieu nhay cam (y te, camera rieng tu,
+  khoa cua) nhung danh doi la kho quan ly khoa/khoi phuc/debug hon.
