@@ -1,8 +1,8 @@
 # Đề tài 43 — Mã hóa đầu cuối trong hệ thống IoT (End-to-End Encryption)
 
-**Học phần:** INT4410 — Bảo mật trong IoT (HK03, năm học 2025–2026)
+**Học phần:** INT4410 — Bảo mật trong IoT 
 **Sinh viên:** Nguyễn Thái Thanh Bình — MSSV 231A010880
-**GVHD:** Hồ Nhựt Minh Sĩ
+**GVHD:** Hồ Nhựt Minh
 **Hình thức:** Cá nhân
 
 ## 1. Mô tả đề tài
@@ -14,7 +14,7 @@ trung gian (cloud) không thể đọc được nội dung dữ liệu thật, v
 xuất khi nào nên áp dụng E2EE trong thực tế (y tế, camera riêng tư,
 khóa cửa...).
 
-## 2. Cấu trúc repo (theo đúng mục 4 tài liệu hướng dẫn học phần)
+## 2. Cấu trúc repo 
 
 ```
 NguyenThaiThanhBinh-MaHoaDauCuoi/
